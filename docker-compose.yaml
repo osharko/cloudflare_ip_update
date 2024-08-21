@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+
+  cloudflare:
+    image: node:20-alpine
+    container_name: cloudflare
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./src/index.js:/app/index.js
+    command: ["sh", "-c", "while true; do node /app/index.js && sleep 300; done"]
